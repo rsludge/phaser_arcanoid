@@ -14,6 +14,8 @@ class PhaserArcanoid
 
       @bricks = @game.add.group()
 
+      @center_text = @game.add.text(260, @game.world.height / 2 - 16, '', { fontSize: '32px', fill: '#fff' })
+
       @game.physics.arcade.enable(@ground)
       @game.physics.arcade.enable(@desk)
       @game.physics.arcade.enable(@ball)
@@ -58,6 +60,14 @@ class PhaserArcanoid
     for coords in @levels[level]
       brick = @bricks.create(coords[0], coords[1], 'brick')
       brick.body.immovable = true
+    this.showPopup('Level ' + (level+1))
+
+  showPopup: (popup_text) ->
+     @center_text.text = popup_text
+     instance = this
+     setTimeout(->
+       instance.center_text.text = ''
+     , 3000)
 
   start: ->
     @levels = [
