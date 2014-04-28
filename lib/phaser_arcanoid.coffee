@@ -8,8 +8,8 @@ class PhaserArcanoid
   create: =>
       @game.physics.startSystem(Phaser.Physics.ARCADE)
 
-      @ground = @game.add.sprite(0, @game.world.height - 64, 'ground')
-      @desk = @game.add.sprite(20, @game.world.height - 79, 'desk')
+      @ground = @game.add.sprite(0, @game.world.height - 20, 'ground')
+      @desk = @game.add.sprite(20, @game.world.height - 34, 'desk')
       @ball = @game.add.sprite(26, @game.world.height - 144, 'ball')
 
       @bricks = @game.add.group()
@@ -50,8 +50,9 @@ class PhaserArcanoid
 
   collectBrick: (ball, brick) ->
       brick.kill()
-      if @bricks.total
-          console.log('you win')
+      if @bricks.total == 0
+        @current_level += 1
+        this.setupLevel(@current_level)
 
   setupLevel: (level) ->
     for coords in @levels[level]
