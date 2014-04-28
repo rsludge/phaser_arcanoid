@@ -15,6 +15,7 @@ class PhaserArcanoid
       @bricks = @game.add.group()
 
       @center_text = @game.add.text(260, @game.world.height / 2 - 16, '', { fontSize: '32px', fill: '#fff' })
+      @lives_text = @game.add.text(2, @game.world.height - 22, 'Lives: ' + @lives, { fontSize: '20px', fill: '#fff' })
 
       @game.physics.arcade.enable(@ground)
       @game.physics.arcade.enable(@desk)
@@ -41,7 +42,7 @@ class PhaserArcanoid
   update: =>
       @game.physics.arcade.collide(@desk, @ground)
       @game.physics.arcade.collide(@desk, @ball)
-      @game.physics.arcade.collide(@ball, @ground)
+      @game.physics.arcade.collide(@ball, @ground, this.ballFalled, null, this)
       @game.physics.arcade.collide(@ball, @bricks, this.collectBrick, null, this)
       if @cursors.left.isDown
           @desk.body.velocity.x = -200
@@ -55,6 +56,13 @@ class PhaserArcanoid
       if @bricks.total == 0
         @current_level += 1
         this.setupLevel(@current_level)
+
+  ballFalled: (ball, ground) ->
+    @lives -= 1
+    @lives_text.text = 'Lives: ' + @lives
+    if @lives == 0
+      this.showPopup('You are looser!')
+      ball.body.velocity.set(0, 0)
 
   setupLevel: (level) ->
     for coords in @levels[level]
@@ -76,6 +84,7 @@ class PhaserArcanoid
     ]
 
     @current_level = 0
+    @lives = 1
     @game = new Phaser.Game(640, 600, Phaser.AUTO, '', { preload: this.preload, create: this.create, update: this.update })
 
 arcanoid = new PhaserArcanoid
