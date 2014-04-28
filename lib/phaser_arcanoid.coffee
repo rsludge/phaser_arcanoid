@@ -17,7 +17,6 @@ class PhaserArcanoid
       @center_text = @game.add.text(260, @game.world.height / 2 - 16, '', { fontSize: 44, fill: '#fff' })
       @lives_text = @game.add.text(2, @game.world.height - 16, 'Lives: ' + @lives, { fontSize: 14, fill: '#fff' })
       @lives_text.fontSize = 14
-      console.log(@lives_text)
 
       @game.physics.arcade.enable(@ground)
       @game.physics.arcade.enable(@desk)
@@ -81,12 +80,12 @@ class PhaserArcanoid
 
   start: ->
     @levels = [
-      [[10, 10], [50, 10], [90, 10], [130, 10], [170, 10]],
+      [[0, 0], [40, 0], [80, 0], [120, 0], [160, 0], [200, 0], [240, 0], [280, 0], [320, 0], [360, 0], [400, 0],[440, 0], [480, 0], [520, 0], [560,0], [600, 0], [0, 24], [40, 24], [80, 24], [120, 24], [160, 24], [200, 24], [240, 24], [280, 24], [320, 24], [360, 24], [400, 24],[440, 24], [480, 24], [520, 24], [560, 24], [600, 24]],
       [[10, 10], [50, 10], [90, 10], [130, 10], [170, 10], [210, 10]],
     ]
 
     @current_level = 0
-    @lives = 1
+    @lives = 5
     @game = new Phaser.Game(640, 600, Phaser.AUTO, '', { preload: this.preload, create: this.create, update: this.update })
 
 arcanoid = new PhaserArcanoid
