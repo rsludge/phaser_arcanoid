@@ -14,8 +14,10 @@ class PhaserArcanoid
 
       @bricks = @game.add.group()
 
-      @center_text = @game.add.text(260, @game.world.height / 2 - 16, '', { fontSize: '32px', fill: '#fff' })
-      @lives_text = @game.add.text(2, @game.world.height - 22, 'Lives: ' + @lives, { fontSize: '20px', fill: '#fff' })
+      @center_text = @game.add.text(260, @game.world.height / 2 - 16, '', { fontSize: 44, fill: '#fff' })
+      @lives_text = @game.add.text(2, @game.world.height - 16, 'Lives: ' + @lives, { fontSize: 14, fill: '#fff' })
+      @lives_text.fontSize = 14
+      console.log(@lives_text)
 
       @game.physics.arcade.enable(@ground)
       @game.physics.arcade.enable(@desk)
@@ -62,7 +64,7 @@ class PhaserArcanoid
     @lives_text.text = 'Lives: ' + @lives
     if @lives == 0
       this.showPopup('You are looser!')
-      ball.body.velocity.set(0, 0)
+      ball.destroy()
 
   setupLevel: (level) ->
     for coords in @levels[level]
