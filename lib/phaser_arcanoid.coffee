@@ -4,19 +4,26 @@ class PhaserArcanoid
     @game.load.image('desk', '../assets/images/desk.png')
     @game.load.image('ball', '../assets/images/ball.png')
     @game.load.image('brick', '../assets/images/brick.png')
+    @game.load.image('background', '../assets/images/back.jpg')
 
   create: =>
       @game.physics.startSystem(Phaser.Physics.ARCADE)
 
-      @ground = @game.add.sprite(0, @game.world.height - 20, 'ground')
-      @desk = @game.add.sprite(20, @game.world.height - 34, 'desk')
+      @game.add.tileSprite(0, 0, 640, 600, 'background') #, frame, group) 
+      @ground = @game.add.sprite(0, @game.world.height - 24, 'ground')
+      @desk = @game.add.sprite(20, @game.world.height - 40, 'desk')
       @ball = @game.add.sprite(26, @game.world.height - 144, 'ball')
 
       @bricks = @game.add.group()
 
-      @center_text = @game.add.text(260, @game.world.height / 2 - 16, '', { fontSize: 44, fill: '#fff' })
+      @center_text = @game.add.text(280, @game.world.height / 2 - 16, '', { fontSize: 44, fill: '#fff', align: 'center' })
+      @finish_text = @game.add.text(220, @game.world.height / 2 - 16, '', { fontSize: 44, fill: '#fff', align: 'center' })
+
       @lives_text = @game.add.text(2, @game.world.height - 16, 'Lives: ' + @lives, { fontSize: 14, fill: '#fff' })
       @lives_text.fontSize = 14
+      @controls_text = @game.add.text(@game.world.width - 170, @game.world.height - 16, 'Controls: ◁ ▷, ▽ to stop', { fontSize: 14, fill: '#fff' })
+      @controls_text.fontSize = 14
+
 
       @game.physics.arcade.enable(@ground)
       @game.physics.arcade.enable(@desk)
@@ -63,7 +70,7 @@ class PhaserArcanoid
     @lives -= 1
     @lives_text.text = 'Lives: ' + @lives
     if @lives == 0
-      this.showPopup('You are looser!')
+      this.showFinish('You are looser!')
       ball.destroy()
 
   setupLevel: (level) ->
@@ -73,11 +80,14 @@ class PhaserArcanoid
     this.showPopup('Level ' + (level+1))
 
   showPopup: (popup_text) ->
-     @center_text.text = popup_text
-     instance = this
-     setTimeout(->
-       instance.center_text.text = ''
-     , 3000)
+    @center_text.text = popup_text
+    instance = this
+    setTimeout(->
+      instance.center_text.text = ''
+    , 3000)
+
+  showFinish: (popup_text) ->
+    @finish_text.text = popup_text
 
   start: ->
     @levels = [
