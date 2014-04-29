@@ -29,6 +29,7 @@ class PhaserArcanoid
 
       @desk.body.immovable = true
       @desk.body.collideWorldBounds = true
+      @desk.body.bounce.x = 1.0
       @ball.body.collideWorldBounds = true
 
       @ball.body.bounce.x = 1.0
