@@ -97,6 +97,7 @@ class PhaserArcanoid
       ball.destroy()
 
   setupLevel: (level) ->
+    @guards.removeAll()
     if @levels[level].bricks
       for coords in @levels[level].bricks
         brick = @bricks.create(coords[0], coords[1], 'brick')
