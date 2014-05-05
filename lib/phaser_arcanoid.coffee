@@ -1,12 +1,12 @@
 class PhaserArcanoid
   preload: =>
-    @game.load.image('ground', '../assets/images/ground.png')
-    @game.load.image('desk', '../assets/images/desk.png')
-    @game.load.image('ball', '../assets/images/ball.png')
-    @game.load.image('brick', '../assets/images/brick.png')
-    @game.load.image('guard', '../assets/images/guard.png')
-    @game.load.image('moveable', '../assets/images/moveable.png')
-    @game.load.image('background', '../assets/images/back.jpg')
+    @game.load.image('ground', 'assets/images/ground.png')
+    @game.load.image('desk', 'assets/images/desk.png')
+    @game.load.image('ball', 'assets/images/ball.png')
+    @game.load.image('brick', 'assets/images/brick.png')
+    @game.load.image('guard', 'assets/images/guard.png')
+    @game.load.image('moveable', 'assets/images/moveable.png')
+    @game.load.image('background', 'assets/images/back.jpg')
 
   create: =>
       @game.physics.startSystem(Phaser.Physics.ARCADE)
