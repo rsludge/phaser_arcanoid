@@ -162,7 +162,7 @@ class PhaserArcanoid
 
     @current_level = 0
     @lives = 5
-    @game = new Phaser.Game(640, 600, Phaser.AUTO, '', { preload: this.preload, create: this.create, update: this.update })
+    @game = new Phaser.Game(640, 600, Phaser.AUTO, 'game', { preload: this.preload, create: this.create, update: this.update })
 
 arcanoid = new PhaserArcanoid
 arcanoid.start()
