@@ -1,6 +1,7 @@
 class PhaserArcanoid
   preload: =>
-    @game.load.image('ground', '../assets/images/ground.png')
+    @game.load.spritesheet('ground', '../assets/images/ground.png', 640, 24)
+    @game.load.image('fail', '../assets/images/fail.png')
     @game.load.image('desk', '../assets/images/desk.png')
     @game.load.image('ball', '../assets/images/ball.png')
     @game.load.image('brick', '../assets/images/brick.png')
@@ -39,6 +40,7 @@ class PhaserArcanoid
       this.setupLevel(@current_level)
 
       @ground.body.immovable = true
+      @ground.animations.add('fail', [0, 1, 0, 1, 0], 10, false, true)
 
       @desk.body.immovable = true
       @desk.body.collideWorldBounds = true
@@ -92,6 +94,7 @@ class PhaserArcanoid
   ballFalled: (ball, ground) ->
     @lives -= 1
     @lives_text.text = 'Lives: ' + @lives
+    @ground.animations.play('fail')
     if @lives == 0
       this.showFinish('You are looser!')
       ball.destroy()
